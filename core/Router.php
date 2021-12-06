@@ -27,10 +27,6 @@ class Router
         if (count($urlParts) == 4) {
             $id = $urlParts[3];
         }
-        else{
-
-        }
-
 
         if ($urlParts[1] == "") {
             $controllerName = "UsersController";
@@ -40,11 +36,9 @@ class Router
             $actionName = $urlParts[2] . "Action";
         }
 
-        // $controllerPath = "./controllers/" . $controllerName . ".php";
         $controllerPath = current(preg_grep("/" . preg_quote($controllerName . ".php") . "/i", glob("./controllers/*")));
 
         if (file_exists($controllerPath) == false) {
-
             $this->view->render("sign", "shared/error404");
             die();
         }
@@ -60,7 +54,6 @@ class Router
         }
 
         try {
-
             if (count($this->post) == 0) {
                 if (isset($id)) {
                     $controller->$action($id);
@@ -74,7 +67,5 @@ class Router
         } catch (Exception $e) {
             $this->view->render("sign", "shared/error404");
         }
-
-
     }
 }

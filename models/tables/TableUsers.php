@@ -1,32 +1,10 @@
 <?php
 session_start();
 
-
 require_once './models/entities/User.php';
-require_once './models/DbConnector.php';
 
 class TableUsers
 {
-    public function getById($id): User
-    {
-        $db = DbConnector::getConnection();
-
-        $queryResult = $db->query("SELECT * FROM `users` WHERE `id` = {$id}");
-
-        if ($queryResult->num_rows == 0) {
-            throw new Exception("User with id = {$id} not found");
-        } else {
-            $row = $queryResult->fetch_assoc();
-            $user = new User(
-                $row["Id"],
-                $row["Name"],
-                $row["Login"],
-                $row["Password"]
-            );
-            return $user;
-        }
-    }
-
     public function isUserByLogin($login)
     {
         $strJsonFileContents = file_get_contents("./DB/users.json");
@@ -92,28 +70,5 @@ class TableUsers
             return $user;
         }
         return null;
-    }
-
-
-    public
-    function edit($id, $login, $password1, $password2, $name)
-    {
-        $db = DbConnector::getConnection();
-
-        if ($password1 == $password2 and $password1 != "") {
-            $password = hash('sha512', $password1);
-
-            $db->query("UPDATE `users` SET `password` = '{$password}' WHERE `users`.`id` = '{$id}';");
-        }
-
-        $result = $db->query("SELECT * FROM `users` WHERE (login='{$login}')");
-
-        $countRows = mysqli_num_rows($result);
-        if ($countRows == 0) {
-            $db->query("UPDATE `users` SET `login` = '{$login}' WHERE `users`.`id` = '{$id}';");
-        }
-        if ($name != "") {
-            $db->query("UPDATE `users` SET `name` = '{$name}' WHERE `users`.`id` = '{$id}';");
-        }
     }
 }

@@ -1,8 +1,3 @@
-<?php
-$url = $_SERVER['REQUEST_URI'];
-$url = explode('?', $url);
-$url = strtolower($url[0]);
-?>
 <!doctype html>
 <html lang="ru">
 <head>
@@ -20,24 +15,21 @@ $url = strtolower($url[0]);
         }
     </style>
 </head>
+
 <body>
-
-
 <header class="card-header p-1 mb-1 border-bottom">
     <div class="container">
         <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
             <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
                 <li><a href="/films/getall" class="nav-link px-2 link-secondary">Films</a></li>
-
             </ul>
 
             <div>
-                <a href="/users/logout" class="link-dark">logout(<?= $_SESSION["user_name"]?>)</a>
+                <a href="/users/logout" class="link-dark">logout(<?= $_SESSION["user_name"] ?>)</a>
             </div>
         </div>
     </div>
 </header>
-
 
 <main style="min-height: 100vh">
     <?php require_once './views/' . $contentPage . '.php'; ?>

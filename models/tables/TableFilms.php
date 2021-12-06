@@ -1,7 +1,6 @@
 <?php
 
 require_once './models/entities/Film.php';
-require_once './models/DbConnector.php';
 
 class TableFilms
 {
@@ -45,10 +44,12 @@ class TableFilms
             $year,
             $_SESSION["user_id"]
         );
+
         array_push($items, $film);
 
         $jsonData = json_encode($items);
         file_put_contents('./DB/films.json', $jsonData);
+
         return $film;
     }
 }

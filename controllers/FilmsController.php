@@ -37,13 +37,8 @@ class FilmsController
     {
         $name = $post["name"];
         $year = $post["year"];
-        //$film =
-            $this->dbManager->Films->addNew($name, $year);
+        $film = $this->dbManager->Films->addNew($name, $year);
 
-//        if (isset($user)) {
-            $this->view->redirect("films/getall");
-//        } else {
-//            $this->view->redirect("users/signup");
-//        }
+        echo $film->Id;
     }
 }

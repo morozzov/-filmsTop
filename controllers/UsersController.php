@@ -48,9 +48,7 @@ class UsersController
         $user = $this->dbManager->Users->auth($login, $password);
 
         if ($user != null) {
-            $this->view->redirect("films/getall");
-        } else {
-            $this->view->redirect("users/signin");
+            echo 'success';
         }
     }
 
@@ -62,9 +60,7 @@ class UsersController
         $user = $this->dbManager->Users->addNew($login, $password, $name);
 
         if (isset($user)) {
-            $this->view->redirect("films/getall");
-        } else {
-            $this->view->redirect("users/signup");
+            echo 'success';
         }
     }
 
